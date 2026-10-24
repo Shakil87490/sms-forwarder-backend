@@ -89,7 +89,7 @@ app.delete('/api/devices/:id', requireAuth, (req, res) => {
 
 // ingest (phone)
 app.post('/api/ingest', (req, res) => {
-  const key = req.headers['x-api-key'] || (req.body && req.body.api_key);
+  const key = req.headers['x-api-key'] || (req.body && req.body.api_key) || req.query.api_key;
   if (!key) return res.status(401).json({ error: 'Missing API key' });
   const dev = db.prepare('SELECT * FROM devices WHERE api_key=?').get(key);
   if (!dev) return res.status(401).json({ error: 'Invalid API key' });
