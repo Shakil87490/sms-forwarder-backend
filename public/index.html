@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Messages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== Login ===== -->
+  <div id="auth" class="auth">
+    <div class="auth-card">
+      <div class="auth-logo"><span class="material-symbols-outlined">chat</span></div>
+      <h1>Messages</h1>
+      <p class="sub">Sign in to see your messages for web</p>
+      <input id="email" type="email" placeholder="Email" autocomplete="username" />
+      <input id="password" type="password" placeholder="Password (min 6)" autocomplete="current-password" />
+      <div class="auth-row">
+        <button id="btnLogin" class="btn-filled">Sign in</button>
+        <button id="btnRegister" class="btn-text">Create account</button>
+      </div>
+      <p id="authErr" class="err"></p>
+    </div>
+  </div>
+
+  <!-- ===== App ===== -->
+  <div id="app" class="app hidden">
+    <!-- Sidebar: conversation list -->
+    <aside id="sidebar" class="sidebar">
+      <header class="side-head">
+        <div class="brand"><span class="material-symbols-outlined brand-ic">chat</span> Messages</div>
+        <div class="side-actions">
+          <button id="btnDevices" class="icon-btn" title="Devices &amp; setup"><span class="material-symbols-outlined">devices</span></button>
+          <button id="btnLogout" class="icon-btn" title="Sign out"><span class="material-symbols-outlined">logout</span></button>
+        </div>
+      </header>
+      <div class="search">
+        <span class="material-symbols-outlined">search</span>
+        <input id="search" placeholder="Search messages" />
+      </div>
+      <div id="convList" class="conv-list"></div>
+      <div id="convEmpty" class="conv-empty hidden">
+        <span class="material-symbols-outlined">forum</span>
+        <p>No messages yet</p>
+        <span class="small">Forwarded SMS will appear here</span>
+      </div>
+    </aside>
+
+    <!-- Thread -->
+    <main id="thread" class="thread">
+      <div id="threadEmpty" class="thread-empty">
+        <span class="material-symbols-outlined big">chat</span>
+        <h2>Messages for web</h2>
+        <p>Select a conversation to read your messages.</p>
+      </div>
+      <div id="threadView" class="thread-view hidden">
+        <header class="thread-head">
+          <button id="btnBack" class="icon-btn back"><span class="material-symbols-outlined">arrow_back</span></button>
+          <div id="threadAvatar" class="avatar"></div>
+          <div class="thread-title"><div id="threadName" class="t-name"></div><div id="threadSub" class="t-sub"></div></div>
+        </header>
+        <div id="bubbles" class="bubbles"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== Devices modal ===== -->
+  <div id="devModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Devices &amp; setup</h3>
+        <button id="devClose" class="icon-btn"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div id="devList"></div>
+      <button id="btnAddDevice" class="btn-filled full">+ Add device</button>
+      <p class="small muted">Add a device to get its API key, then paste the ingest URL into the phone app's Webhook field.</p>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
